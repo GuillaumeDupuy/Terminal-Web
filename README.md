@@ -44,12 +44,12 @@ var terminal = new Terminal('terminal', {}, {
         return '';
 
       case 'help':
-        return 'Commands: clear, help, theme, ver or version<br>More help available <a class="external" href="http://github.com/sasadjolic/dom-terminal" target="_blank">here</a>';
+        return 'Commands: clear, help, theme, version, ls, ll, cd, pwd, cat, sudo, open <br>More help available <a class="external" href="http://github.com/sasadjolic/dom-terminal" target="_blank">here</a>';
 
       case 'theme':
         if (args && args[0]) {
           if (args.length > 1) return 'Too many arguments';
-          else if (args[0].match(/^interlaced|modern|white$/)) { terminal.setTheme(args[0]); return ''; }
+          else if (args[0].match(/^dark-light|dark|white|kali|ubuntu$/)) { terminal.setTheme(args[0]); return ''; }
           else return 'Invalid theme';
         }
         return terminal.getTheme();
@@ -67,7 +67,7 @@ var terminal = new Terminal('terminal', {}, {
 ```
 
 This gives us 11 commands: `clear`, `help`, `theme`, `version`, `ls`, `ll`, `cd`, `pwd`, `cat`, `sudo`, `open`.
-[Go ahead and try it out using our live example.](https://guillaumedupuy.github.io/Site-CTF/terminal.html)
+[Go ahead and try it out using our live example.](https://guillaumedupuy.github.io/Terminal-Web/terminal.html)
 
 ## Features
 
@@ -196,8 +196,8 @@ terminal.clear();
 terminal.setTheme('dark-light');
 ```
 
-Sets CSS class `terminal-interlaced` on the terminal DOM element. The three built-in
-themes are `interlaced`, `modern`, and `white`. You can also make your own theme and
+Sets CSS class `terminal-dark-light` on the terminal DOM element. The three built-in
+themes are `dark-light`, `dark`, `white`, `kali`, `ubuntu` and `hacker`. You can also make your own theme and
 pass in your theme's name into `setTheme`.
 
 To retrieve the name of the active theme, use `getTheme`.
@@ -212,7 +212,7 @@ console.log(terminal.getTheme());
 terminal.setPrompt('test');
 ```
 
-Because the default separator is `>` this will display:
+Because the default separator is `$` this will display:
 
 ```
 test>

@@ -71,8 +71,8 @@
 					if (!args || args.length <= 0) return 'Too few arguments<br />Usage: cat &lt;file&gt;';
 					else if (args.length > 1) return 'Too many arguments<br />Usage: cat &lt;file&gt;';
 					else return terminal.catFile(args[0]);
-				case 'flag':
-					return "You can't get the flag like this. Try to use sudo.";
+				case 'root':
+					return "You can't acces to root. Try to use sudo.";
 				case 'open':
 					if (!args || args.length <= 0) return 'Too few arguments<br />Usage: cat &lt;file&gt;';
 					else if (args.length > 1) return 'Too many arguments<br />Usage: cat &lt;file&gt;';
@@ -84,7 +84,7 @@
 				case 'sudo':
 					if (!args || args.length <= 0) return 'Too few arguments<br />Usage: sudo &lt;command&gt;';
 					// else if (args.length > 1) return 'Too many arguments<br />Usage: sudo &lt;command&gt;';
-					else if (args[0] == 'flag') return "SMEP{1_4m_4_flag}";
+					else if (args[0] == 'su') return "You are in root";
 					else return "Sorry, try again.";
 					
 				default:
