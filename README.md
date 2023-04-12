@@ -11,11 +11,11 @@ Enjoy.
 
 ## How to use
 
-Include `terminal.min.js` and `terminal.min.css` in your HTML:
+Include `terminal.js` and `terminal.css` in your HTML:
 
 ```html
-<script src="terminal.min.js"></script>
-<link rel="stylesheet" media="all" href="terminal.min.css">
+<script src="terminal.js"></script>
+<link rel="stylesheet" media="all" href="terminal.css">
 ```
 
 Define an HTML div tag where the terminal will be contained:
@@ -44,7 +44,7 @@ var terminal = new Terminal('terminal', {}, {
         return '';
 
       case 'help':
-        return 'Commands: clear, help, theme, version, ls, ll, cd, pwd, cat, sudo, open <br>More help available <a class="external" href="http://github.com/sasadjolic/dom-terminal" target="_blank">here</a>';
+        return 'Commands: clear, help, theme, version, ls, ll, cd, pwd, cat, sudo, open <br>';
 
       case 'theme':
         if (args && args[0]) {
