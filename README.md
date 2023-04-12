@@ -44,7 +44,7 @@ var terminal = new Terminal('terminal', {}, {
         return '';
 
       case 'help':
-        return 'Commands: clear, help, theme, version, ls, ll, cd, pwd, cat, sudo, open <br>';
+        return 'Commands: clear, help, theme, version, ls, ll, cd, pwd, cat, sudo, open, rm, rmdir, mkdir, touch, echo, date, hostname, grep, tail, ping <br>';
 
       case 'theme':
         if (args && args[0]) {
@@ -66,7 +66,7 @@ var terminal = new Terminal('terminal', {}, {
 });
 ```
 
-This gives us 11 commands: `clear`, `help`, `theme`, `version`, `ls`, `ll`, `cd`, `pwd`, `cat`, `sudo`, `open`.
+This gives us 21 commands: `clear`, `help`, `theme`, `version`, `ls`, `ll`, `cd`, `pwd`, `cat`, `sudo`, `open`, `rm`, `rmdir`, `mkdir`, `touch`, `echo`, `date`, `hostname`, `grep`, `tail`, `ping`.
 [Go ahead and try it out using our live example.](https://guillaumedupuy.github.io/Terminal-Web/terminal.html)
 
 ## Features

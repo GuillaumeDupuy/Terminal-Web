@@ -10,6 +10,7 @@
                     '<span class="user">guest</span><span class="separator">@</span><span class="hostname">LAPTOP-70OOA4D1</span><span class="separator2">:</span>',
                 separator: "<span class='separator3'>$</span>",
                 theme: "dark-light",
+                hostname: "LAPTOP-70OOA4D1",
             };
 
             var options = options || defaults;
@@ -17,6 +18,7 @@
             options.prompt = options.prompt || defaults.prompt;
             options.separator = options.separator || defaults.separator;
             options.theme = options.theme || defaults.theme;
+            options.hostname = options.hostname || defaults.hostname;
 
             var extensions = Array.prototype.slice.call(arguments, 2);
 
@@ -207,6 +209,66 @@
                     opt_args: ["command"],
                     description: "Execute command as root",
                     usage: "sudo cat README",
+                },
+                rm: {
+                    req_args: ["directory/file/link"],
+                    opt_args: [],
+                    description: "Remove directory/file/link but it's not usable",
+                    usage: "rm README",
+                },
+                rmdir: {
+                    req_args: ["directory"],
+                    opt_args: [],
+                    description: "Remove directory but it's not usable",
+                    usage: "rmdir /site",
+                },
+                mkdir: {
+                    req_args: ["directory"],
+                    opt_args: [],
+                    description: "Create directory but it's not usable",
+                    usage: "mkdir /site",
+                },
+                touch: {
+                    req_args: ["file"],
+                    opt_args: [],
+                    description: "Create file but it's not usable",
+                    usage: "touch README",
+                },
+                echo: {
+                    req_args: ["text"],
+                    opt_args: [],
+                    description: "Display text",
+                    usage: "echo Hello World",
+                },
+                date: {
+                    req_args: [],
+                    opt_args: [],
+                    description: "Display current date",
+                    usage: "date",
+                },
+                hostname: {
+                    req_args: [],
+                    opt_args: [],
+                    description: "Display current hostname or set new hostname if argument is provided",
+                    usage: "hostname or hostname new_hostname",
+                },
+                grep: {
+                    req_args: ["file"],
+                    opt_args: ["text"],
+                    description: "Search for text in file",
+                    usage: "grep fun README",
+                },
+                tail: {
+                    req_args: ["file"],
+                    opt_args: [],
+                    description: "Display last according to the number of lines of the file",
+                    usage: "tail README or tail README 2",
+                },
+                ping: {
+                    req_args: ["host"],
+                    opt_args: [],
+                    description: "Ping host",
+                    usage: "ping google.com",
                 },
             };
 
@@ -555,6 +617,53 @@
                         return directory.result.name + ": This is a directory";
                     window.open(directory.result.content, "_blank");
                     return "";
+                },
+                echoString: function (string) {
+                    return string;
+                },
+                getDate: function () {
+                    return new Date().toLocaleString();
+                },
+                setHostname: function (hostname) {
+                    options.hostname = hostname;
+                    return "";
+                },
+                getHostname: function () {
+                    return options.hostname;
+                },
+                grepString: function (string, file) {
+                    var path = parsePath(file, _currentPwd);
+                    var directory = getFile(path, _currentPwd);
+                    if (directory.error) return directory.result;
+                    if (directory.result.type == fileType.DIRECTORY)
+                        return directory.result.name + ": This is a directory";
+                    var lines = directory.result.content.split("<br />");
+                    var result = [];
+                    for (var i = 0; i < lines.length; i++) {
+                        if (lines[i].indexOf(string) > -1) {
+                            result.push(lines[i]);
+                        }
+                    }
+                    return result.join("\n");
+                },
+                tailFile: function (file, numberlines) {
+                    var path = parsePath(file, _currentPwd);
+                    var directory = getFile(path, _currentPwd);
+                    if (directory.error) return directory.result;
+                    if (directory.result.type == fileType.DIRECTORY)
+                        return directory.result.name + ": This is a directory";
+                    var lines = directory.result.content.split("<br />");
+                    return lines.slice(-numberlines).join("\n");
+                },
+                pingHost: function (host) {
+                    if (host != "google.com") return "Ping request could not find host google.com. Please check the name and try again.";
+                    var ping = `Pinging ` + host + ` with 32 bytes of data: 
+\n64 bytes from par10s49-in-f14.1e100.net ` + host + `: icmp_seq=1 ttl=114 time=7.61 ms 
+64 bytes from par10s49-in-f14.1e100.net ` + host + `: icmp_seq=2 ttl=114 time=4.79 ms
+64 bytes from par10s49-in-f14.1e100.net ` + host + `: icmp_seq=3 ttl=114 time=5.02 ms
+\n--- ` + host + ` ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 5009ms`;
+                    return ping.replace(/\n/g, "<br />");
                 },
             };
         };
