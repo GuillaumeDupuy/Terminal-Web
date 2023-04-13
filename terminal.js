@@ -665,6 +665,9 @@
 3 packets transmitted, 3 received, 0% packet loss, time 5009ms`;
                     return ping.replace(/\n/g, "<br />");
                 },
+                code: function () {
+                    
+                }
             };
         };
 
@@ -698,6 +701,28 @@ ctx.fillRect(0, 0, w, h);
 const cols = Math.floor(w / 20) + 1;
 const ypos = Array(cols).fill(0);
 
+// Générer un caractère chinois aléatoire
+function generateRandomChineseCharacter() {
+    // Obtenir un point de code aléatoire dans la plage de caractères chinois
+    const randomCodePoint = Math.floor(Math.random() * (40959 - 19968 + 1)) + 19968;
+    // Convertir le point de code en un caractère chinois
+    const randomCharacter = String.fromCharCode(randomCodePoint);
+    return randomCharacter;
+}
+
+function generateRandomCharacter() {
+    const randomNumber = Math.random();
+    if (randomNumber < 0.5) {
+      // generate a random character ASCII
+      const randomAsciiCharacter = String.fromCharCode(Math.floor(Math.random() * 128));
+      return randomAsciiCharacter;
+    } else {
+      // generate a random character chinese
+      const randomChineseCharacter = generateRandomChineseCharacter();
+      return randomChineseCharacter;
+    }
+}
+
 function matrix () {
   // Draw a semitransparent black rectangle on top of previous drawing
   ctx.fillStyle = '#0001';
@@ -710,12 +735,12 @@ function matrix () {
   // for each column put a random character at the end
   ypos.forEach((y, ind) => {
     // generate a random character
-    const text = String.fromCharCode(Math.random() * 128);
+    const randomCharacter = generateRandomCharacter();
 
     // x coordinate of the column, y coordinate is already given
     const x = ind * 20;
     // render the character at (x, y)
-    ctx.fillText(text, x, y);
+    ctx.fillText(randomCharacter, x, y);
 
     // randomly reset the end of the column if it's at least 100px high
     if (y > 100 + Math.random() * 10000) ypos[ind] = 0;

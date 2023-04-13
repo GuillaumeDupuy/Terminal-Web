@@ -136,6 +136,9 @@
 						else if (args.length > 1) return 'Too many arguments<br />Usage: ping &lt;host&gt;';
 						else return terminal.pingHost(args[0]);
 
+					case 'code': 
+						return terminal.code(args[0]);
+
 					default:
 						// Unknown command.
 						return false;
