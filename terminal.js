@@ -187,7 +187,7 @@
                 },
                 theme: {
                     req_args: [],
-                    opt_args: ["dark-light|dark|white|kali|ubuntu|hacker|dracula|transparent"],
+                    opt_args: ["dark-light|dark|white|kali|ubuntu|hacker|dracula|transparent|nyan-cat|powershell"],
                     description:
                         "Display current theme or set new theme if argument is provided",
                     usage: "theme white",
